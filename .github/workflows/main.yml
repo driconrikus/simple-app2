@@ -14,8 +14,11 @@ jobs:
       - name: Build the Docker Image
         run: docker build -t driconrikus/simple-app2 .
 
-      - name: Log in to the registry
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to Docker registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push the Docker Image
         run: docker push driconrikus/simple-app2
